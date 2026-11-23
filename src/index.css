@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Chakra Petch", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    background-color: #07050e;
+    color: #f8fafc;
+  }
+}
+
+.arcade-headline-shadow {
+  text-shadow: 3px 3px 0px #7c3aed;
+}
+
+.arcade-grid-wrapper {
+  perspective: 340px;
+  perspective-origin: 50% 0%;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.72) 18%, rgba(0, 0, 0, 1) 52%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.72) 18%,
+    rgba(0, 0, 0, 1) 52%
+  );
+}
+
+.arcade-grid-plane {
+  position: absolute;
+  top: -120%;
+  bottom: 0;
+  left: -60%;
+  right: -60%;
+  transform: rotateX(70deg);
+  transform-origin: 50% 100%;
+  background-image:
+    linear-gradient(to right, rgba(139, 92, 246, 0.55) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.55) 1.5px, transparent 1.5px);
+  background-size: 48px 48px;
+  animation: arcadeGridScroll 2.6s linear infinite;
+}
+
+.arcade-grid-plane.grid-paused {
+  animation-play-state: paused;
+}
+
+@keyframes arcadeGridScroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-grid-plane {
+    animation-play-state: paused;
+  }
+}
